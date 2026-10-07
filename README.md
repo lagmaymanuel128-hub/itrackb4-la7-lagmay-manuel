@@ -1,5 +1,5 @@
 ITRACKB4 LA7: Let Them Add Something
-Name: Manuel T. Lagmay Jr. Block: (fill in: 4A or 4C)
+Name: Manuel T. Lagmay Jr. Block: 4A
 
 This project adds a form for adding a Bicolano dish. Dishes are now stored in storage/app/dishes.json. The form at /dishes/create posts to dishes.store, which validates the input, saves it, and redirects to the list with a one-time success message.
 
