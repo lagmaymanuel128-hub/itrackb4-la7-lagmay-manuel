@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 
 class DishController extends Controller
 {
-    protected function getDishes()
+    // Part A: reads the dishes from the JSON file (instead of a written-out array)
+    private function getDishes()
     {
-        return [
-            1 => ['name' => 'Bicol Express', 'main_ingredient' => 'Pork and Sili', 'origin' => 'Naga City'],
-            2 => ['name' => 'Laing', 'main_ingredient' => 'Dried Taro Leaves', 'origin' => 'Camarines Sur'],
-            3 => ['name' => 'Pinangat', 'main_ingredient' => 'Taro Leaves and Coconut Milk', 'origin' => 'Camarines Sur'],
-            4 => ['name' => 'Kinunot', 'main_ingredient' => 'Shark or Stingray', 'origin' => 'Albay'],
-            5 => ['name' => 'Sinantol', 'main_ingredient' => 'Santol Fruit', 'origin' => 'Camarines Norte'],
-            6 => ['name' => 'Sili Ice Cream', 'main_ingredient' => 'Chili and Cream', 'origin' => 'Camarines Sur'],
-        ];
+        return json_decode(file_get_contents(storage_path('app/dishes.json')), true);
+    }
+
+    // Part A: writes the dishes array back to the JSON file
+    private function saveDishes(array $dishes)
+    {
+        file_put_contents(
+            storage_path('app/dishes.json'),
+            json_encode($dishes, JSON_PRETTY_PRINT)
+        );
     }
 
     /**
@@ -32,7 +35,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('dishes.create');
     }
 
     /**
@@ -40,7 +43,22 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Part C: validate first. If a rule fails, Laravel stops here
+        // and sends the visitor back to the form with the errors.
+        $validated = $request->validate([
+            'name'            => 'required|max:100',
+            'main_ingredient' => 'required|max:150',
+            'origin'          => 'required|in:Naga City,Camarines Sur,Albay,Camarines Norte',
+        ]);
+
+        // Part B: add the new dish with the next free id, then save the file
+        $dishes = $this->getDishes();
+        $newId = empty($dishes) ? 1 : max(array_keys($dishes)) + 1;
+        $dishes[$newId] = $validated;
+        $this->saveDishes($dishes);
+
+        // Part E: redirect to a route name (not a view) with a one-time message
+        return redirect()->route('dishes.index')->with('success', 'Dish added successfully!');
     }
 
     /**

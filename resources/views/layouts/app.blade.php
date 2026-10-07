@@ -14,6 +14,11 @@
         <h1>Bicolano Dishes</h1>
         <p class="text-muted">Prepared by: LAGMAY JR. MANUEL T.</p>
 
+        {{-- Part E: success message, read once from the session --}}
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
         @yield('content')
     </div>
 </body>

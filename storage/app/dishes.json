@@ -1,0 +1,32 @@
+{
+    "1": {
+        "name": "Bicol Express",
+        "main_ingredient": "Pork and Sili",
+        "origin": "Naga City"
+    },
+    "2": {
+        "name": "Laing",
+        "main_ingredient": "Dried Taro Leaves",
+        "origin": "Camarines Sur"
+    },
+    "3": {
+        "name": "Pinangat",
+        "main_ingredient": "Taro Leaves and Coconut Milk",
+        "origin": "Camarines Sur"
+    },
+    "4": {
+        "name": "Kinunot",
+        "main_ingredient": "Shark or Stingray",
+        "origin": "Albay"
+    },
+    "5": {
+        "name": "Sinantol",
+        "main_ingredient": "Santol Fruit",
+        "origin": "Camarines Norte"
+    },
+    "6": {
+        "name": "Sili Ice Cream",
+        "main_ingredient": "Chili and Cream",
+        "origin": "Camarines Sur"
+    }
+}

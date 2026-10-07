@@ -3,6 +3,8 @@
 @section('title', 'Bicolano Dishes')
 
 @section('content')
+    <a href="{{ route('dishes.create') }}" class="btn btn-success mb-3">Add Dish</a>
+
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
